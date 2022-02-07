@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link, Navigate, Route, Routes } from "react-router-dom";
+import Menu from "./Menu/Menu";
+import FormProjectPage from "./pages/FormProjectPage";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import ProjectPage from "./pages/ProjectPage";
+import ProjectsPage from "./pages/ProjectsPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Menu />
+      <p>Wow cómo mola esto</p>
+      <Routes>
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/projects">
+          <Route index element={<ProjectsPage />} />
+          <Route path="view/:idProject" element={<ProjectPage />} />
+          <Route path="new" element={<FormProjectPage />} />
+          <Route path="edit/:id" element={<FormProjectPage />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 
